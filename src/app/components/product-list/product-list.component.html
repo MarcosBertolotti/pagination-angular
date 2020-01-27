@@ -1,0 +1,50 @@
+<div class="container pt-4">
+
+    <!-- <fa-icon [icon]="faSort"></fa-icon> -->
+    <!-- [ngClass]="clicked ? 'text-danger' : 'text-primary' ">  -->
+    <!-- <i (click)=changeOrder() class="fa" [ngClass]="toggle ? 'fa-sort-down' : 'fa-sort-up' "></i> -->
+
+    <section>
+
+        <div class="row">
+            <div class="col">
+                Show <input type="number" id="mySize" name="mySize" [(ngModel)]="mySize" min="1" class="form-control col-1 d-inline mb-2"> 
+                entries of {{ total }}
+                
+                <button type="button" (click)="changeSize()" class="btn btn-primary btn-sm ml-1">Accept</button>
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover table-sm table-responsive-sm">
+            
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" *ngFor="let column of columns" 
+                        (click)=sortTable(column.columnDef) 
+                        [ngClass]="{ 'text-primary': columnSelected == column.columnDef, '': columnSelect != column.columnDef }"
+                        >
+
+                        <i class="fa" 
+                            [ngClass]="{ 'fa-sort-up': orderProperty != column.columnDef, 'fa-sort-down' : orderProperty == column.columnDef }">
+                        </i>   
+                        {{ column.header }}  
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of productList" 
+                    app-product-list-row 
+                    [product]="product" >
+                </tr>
+            </tbody>
+        </table>
+
+        <app-product-list-pagination
+            [page]="page"
+            [maxPage]="maxPage"
+            (selectedPageEvent)="changePage($event)">
+
+        </app-product-list-pagination>
+
+    </section>
+</div>

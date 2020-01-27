@@ -1,0 +1,40 @@
+<nav aria-label="...">
+    <ul class="pagination">
+
+        <li class="page-item" [ngClass]="{disabled: page == 0}">
+            <span class="page-link" (click)="selectPage(page-1)">Previous</span>
+        </li>
+        
+        <li class="page-item" *ngIf="page-2 >= 0">
+            <span class="page-link" (click)="selectPage(page-2)">{{ page-1 }}</span>
+        </li>
+
+        <li class="page-item" *ngIf="page-1 >= 0">
+            <span class="page-link" (click)="selectPage(page-1)">{{ page }}</span>
+        </li>
+
+        <li class="page-item active">
+            <span class="page-link" (click)="selectPage(page)">{{ page+1 }}</span>
+        </li>
+
+        <li class="page-item" *ngIf="page+1 < maxPage">
+            <span class="page-link" (click)="selectPage(page+1)">{{ page+2}}</span>
+        </li>
+
+        <li class="page-item" *ngIf="page+2 < maxPage">
+            <span class="page-link" (click)="selectPage(page+2)">{{ page+3}}</span>
+        </li>
+
+        <li class="page-item" [ngClass]="{disabled: page+1 == maxPage}">
+            <span class="page-link" (click)="selectPage(page+1)">Next</span>
+        </li>
+
+    </ul>
+</nav>
+
+<!--
+        <li class="page-item" [ngClass]="{active: page == i}" *ngFor="let n of arr(maxPage); let i = index"
+            (click)=selectPage(i)>
+            <a class="page-link">{{ i+1 }}</a>
+        </li>
+-->
